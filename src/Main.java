@@ -39,14 +39,18 @@ public class Main {
                     String message;
 
                     while ((message = input.readLine()) != null) {
-
-                        if (message.equals("PING")) {
+                         String[] parts = message.split(" ", 3);
+                         String command = parts[0]; 
+                        if (command.equals("PING")) {
 
                             output.println("PONG");
 
-                        } else if (message.startsWith("SET")) {
+                        } else if (command.startsWith("SET")) {
 
-                            String[] parts = message.split(" ", 3);
+                           if(parts.length< 3){
+                              output.println("ERR Wrong number of arguments for SET");
+                              continue; 
+                           }
 
                             String key = parts[1];
                             String value = parts[2];
@@ -55,9 +59,12 @@ public class Main {
 
                             output.println("OK");
 
-                        } else if (message.startsWith("GET")) {
+                        } else if (command.startsWith("GET")) {
 
-                            String[] parts = message.split(" ");
+                            if(parts.length < 2){
+                                output.println("ERR Wrong number of arguments for GET");
+                                continue;
+                            }
 
                             String value = datastore.get(parts[1]);
 
