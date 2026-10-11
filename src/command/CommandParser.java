@@ -1,5 +1,6 @@
 package command;
 
+import java.util.Locale;
 
 public class CommandParser {
 
@@ -7,7 +8,9 @@ public class CommandParser {
 
         String[] parts = message.split(" ", 3);
 
-        String commandName = parts[0];
+        
+        String commandName = parts[0].toUpperCase(Locale.ROOT);
+
 
         if (commandName.equals("PING")) {
             return new Command("PING", null, null);
